@@ -1,0 +1,44 @@
+
+*{
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-overflow-scrolling: touch;
+}
+html,#app {
+  height: 100%;
+  overflow: auto;
+}
+body{
+	font-family: -apple-system,
+  BlinkMacSystemFont,
+  PingFangSC-Regular,
+  "Segoe UI",
+  "Roboto",
+  "Oxygen",
+  "Ubuntu",
+  "Cantarell",
+  "Fira Sans",
+  "Droid Sans",
+  "Hiragino Sans GB",
+  "Microsoft Yahei", "微软雅黑",
+  Arial, Helvetica, STHeiti, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";  
+  height: 100%;
+}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, button, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, input, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, select, small, span, strike, strong, sub, summary, sup, table, textarea, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video { margin: 0; padding: 0; box-sizing: border-box; word-break:break-all; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+i, em, b, strong { font-style: normal; }
+table{ border-collapse:collapse; }
+li{list-style-type:none;}
+body { font: 14px/1.5 PingFangSC-Regular;}
+a { text-decoration: none; color: inherit; }
+a:focus { outline: none; }
+img { border: none; vertical-align:middle;}
+input, button, select, textarea { outline: none; border: none; font-size: inherit; font-family:inherit;}
+input.disabled, textarea.disabled { background: #ccc;}
+button.disabled{background: #ccc;color:#fff;}
+button.disabled:hover{background: #ccc;color:#fff;cursor:default;}
+textarea { resize: none; }
+
+.button {
+  color: rgb(96, 137, 165) !important;
+}
