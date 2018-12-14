@@ -11,7 +11,7 @@ export default {
     build: 'https://t1.tiejin.cn',
     dev: 'https://t1-qa.tiejin.cn',
     sandbox: 'https://t1-sandbox.tiejin.cn',
-    local: 'http://127.0.0.1:9999'
+    local: 'http://127.0.0.1:8888'
   },
   file: {
     build: 'https://file.tiejin.cn',
@@ -23,7 +23,7 @@ export default {
     build: 'https://api.tiejin.cn/command/',
     dev: 'https://api-sandbox.tiejin.cn/command/',
     sandbox: 'https://api-sandbox.tiejin.cn/command/',
-    local: 'https://api-sandbox.tiejin.cn/command/'
+    local: ''
   },
   download: {
     build: 'https://download.tiejin.cn/?adid=closer-t1&fs=false&microlink=https%3a%2f%2fa.app.qq.com%2fo%2fsimple.jsp%3fpkgname%3dcom.ums.closer%26ckey%3dCK1409137336588',

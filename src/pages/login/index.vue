@@ -9,81 +9,61 @@
     </el-form-item>
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
+      <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" :loading="logining">登录</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-  //import NProgress from 'nprogress'
-    import { requestLogin } from '../api/api';
+  import {
+    mapActions,
+    mapState
+  } from "vuex";
   export default {
     data() {
       return {
         logining: false,
         ruleForm2: {
-          account: 'admin',
-          checkPass: '123456'
+          account: "admin",
+          checkPass: "123456"
         },
         rules2: {
           account: [{
               required: true,
-              message: '请输入账号',
-              trigger: 'blur'
-            },
-            //{ validator: validaePass }
+              message: "请输入账号",
+              trigger: "blur"
+            }
           ],
           checkPass: [{
               required: true,
-              message: '请输入密码',
-              trigger: 'blur'
-            },
-            //{ validator: validaePass2 }
+              message: "请输入密码",
+              trigger: "blur"
+            }
           ]
         },
         checked: true
       };
     },
     methods: {
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
-      },
-      handleSubmit2(ev) {
-        var _this = this;
-        this.$refs.ruleForm2.validate((valid) => {
+      ...mapActions("login", ["loginAction"]),
+      handleLogin() {
+        this.$refs.ruleForm2.validate(valid => {
           if (valid) {
             this.logining = true;
             var loginParams = {
               username: this.ruleForm2.account,
               password: this.ruleForm2.checkPass
             };
-            requestLogin(loginParams).then(data => {
-              this.logining = false;
-              let {
-                msg,
-                code,
-                user
-              } = data;
-              if (code !== 200) {
-                this.$message({
-                  message: msg,
-                  type: 'error'
-                });
-              } else {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({
-                  path: '/table'
-                });
-              }
-            });
+            this.loginAction(loginParams);
+            this.logining = false;
           } else {
-            console.log('error submit!!');
+            console.log("error submit!!");
             return false;
           }
         });
       }
     }
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

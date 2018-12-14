@@ -106,9 +106,10 @@
 
 <script>
 	import util from '../../common/utils'
-	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-
+  import {
+    mapActions,
+    mapState
+  } from "vuex";
 	export default {
 		data() {
 			return {
@@ -157,6 +158,7 @@
 			}
 		},
 		methods: {
+      ...mapActions('table',[getUserListPage, removeUser, batchRemoveUser, editUser, addUser]),
 			//性别显示转换
 			formatSex: function (row, column) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';

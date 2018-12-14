@@ -1,5 +1,5 @@
 module.exports = {
-  lintOnSave: true,
+  lintOnSave: false,
   outputDir:'dist',
   assetsDir:'assets',
   productionSourceMap: true, // 是否在构建生产包时生成 sourceMap 文件，false将提高构建速度
