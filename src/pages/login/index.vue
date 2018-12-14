@@ -11,6 +11,7 @@
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" :loading="logining">登录</el-button>
     </el-form-item>
+    {{user}}
   </el-form>
 </template>
 
@@ -44,8 +45,11 @@
         checked: true
       };
     },
+    computed:{
+      // ...mapState("login",["user"]) //暴露vuex state 本页面不需要
+    },
     methods: {
-      ...mapActions("login", ["loginAction"]),
+      ...mapActions("login", ["loginAction"]),//暴露vuex函数
       handleLogin() {
         this.$refs.ruleForm2.validate(valid => {
           if (valid) {
