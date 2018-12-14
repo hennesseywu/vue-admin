@@ -44,8 +44,11 @@
         checked: true
       };
     },
+    computed:{
+      // ...mapState("login",["user"]) //暴露vuex state 本页面不需要
+    },
     methods: {
-      ...mapActions("login", ["loginAction"]),
+      ...mapActions("login", ["loginAction"]),//暴露vuex函数
       handleLogin() {
         this.$refs.ruleForm2.validate(valid => {
           if (valid) {
