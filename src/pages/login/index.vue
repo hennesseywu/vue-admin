@@ -11,7 +11,6 @@
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" :loading="logining">登录</el-button>
     </el-form-item>
-    {{user}}
   </el-form>
 </template>
 
