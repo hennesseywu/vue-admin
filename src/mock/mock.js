@@ -52,6 +52,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
+            code: 200, 
+            msg: '请求成功',
             users: mockUsers
           }]);
         }, 1000);
@@ -70,6 +72,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
+            code: 200, 
+            msg: '请求成功',
             total: total,
             users: mockUsers
           }]);

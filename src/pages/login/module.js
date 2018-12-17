@@ -22,7 +22,7 @@ const actions = {
     let {data} =await requestLogin(params);
     if (data.code !== 200) {
       Message({
-        message: msg,
+        message:data.msg,
         type: 'error'
       });
     } else {

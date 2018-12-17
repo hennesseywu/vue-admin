@@ -1,8 +1,8 @@
 <template>
 	<el-row class="container">
 		<el-col :span="24" class="header">
-			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-				{{collapsed?'':sysName}}
+			<el-col :span="10" class="logo logo-width">
+				{{sysName}}
 			</el-col>
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="hover">
@@ -16,9 +16,9 @@
 			</el-col>
 		</el-col>
 		<el-col :span="24" class="main">
-			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
+			<aside class="menu-expanded">
 				<!--导航菜单-->
-				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" unique-opened router v-show="!collapsed">
+				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" unique-opened router >
 					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
 								<el-submenu :index="index+''" v-if="!item.leaf" >
 									<template slot="title">{{item.name}}
@@ -55,7 +55,6 @@
 		data() {
 			return {
 				sysName: 'VUE+ELEMENT',
-				collapsed: false,
 				sysUserName: '',
 				sysUserAvatar: '',
 				form: {
@@ -90,16 +89,10 @@
 					sessionStorage.removeItem('user');
 					_this.$router.push('/login');
 				}).catch(() => {
-	
 				});
 			},
-			//折叠导航栏
-			collapse: function() {
-				this.collapsed = !this.collapsed;
-			},
-			showMenu(i, status) {
-				this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
-			}
+		
+		
 		},
 		mounted() {
 			var user = sessionStorage.getItem('user');
@@ -162,9 +155,6 @@
 			.logo-width {
 				width: 230px;
 			}
-			.logo-collapse-width {
-				width: 60px
-			}
 			.tools {
 				padding: 0px 23px;
 				width: 14px;
@@ -189,24 +179,6 @@
 				.el-menu {
 					height: 100%;
 				}
-				.collapsed {
-					width: 60px;
-					.item {
-						position: relative;
-					}
-					.submenu {
-						position: absolute;
-						top: 0px;
-						left: 60px;
-						z-index: 99999;
-						height: auto;
-						display: none;
-					}
-				}
-			}
-			.menu-collapsed {
-				flex: 0 0 60px;
-				width: 60px;
 			}
 			.menu-expanded {
 				flex: 0 0 230px;

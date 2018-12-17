@@ -14,9 +14,8 @@
 				</el-form-item>
 			</el-form>
 		</el-col>
-
 		<!--列表-->
-		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+		<el-table :data="userList" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column type="index" width="60">
@@ -32,9 +31,9 @@
 			<el-table-column prop="addr" label="地址" min-width="180" sortable>
 			</el-table-column>
 			<el-table-column label="操作" width="150">
-				<template scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+				<template slot-scope="user">
+												<el-button size="small" @click="handleEdit(user.$index, user.row)">编辑</el-button>
+												<el-button type="danger" size="small" @click="handleDel(user.$index, user.row)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -47,7 +46,7 @@
 		</el-col>
 
 		<!--编辑界面-->
-		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+		<el-dialog title="编辑"  :visible.sync="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
 				<el-form-item label="姓名" prop="name">
 					<el-input v-model="editForm.name" auto-complete="off"></el-input>
@@ -75,7 +74,7 @@
 		</el-dialog>
 
 		<!--新增界面-->
-		<el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
+		<el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 				<el-form-item label="姓名" prop="name">
 					<el-input v-model="addForm.name" auto-complete="off"></el-input>
@@ -105,28 +104,29 @@
 </template>
 
 <script>
-	import util from '../../common/utils'
-	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
-
+	import {
+		mapState,
+		mapActions
+	} from 'vuex';
+	import util from '../../common/utils';
 	export default {
 		data() {
 			return {
 				filters: {
 					name: ''
 				},
-				users: [],
 				total: 0,
 				page: 1,
 				listLoading: false,
-				sels: [],//列表选中列
-
-				editFormVisible: false,//编辑界面是否显示
+				sels: [], //列表选中列
+				editFormVisible: false, //编辑界面是否显示
 				editLoading: false,
 				editFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
-					]
+					name: [{
+						required: true,
+						message: '请输入姓名',
+						trigger: 'blur'
+					}]
 				},
 				//编辑界面数据
 				editForm: {
@@ -137,13 +137,15 @@
 					birth: '',
 					addr: ''
 				},
-
-				addFormVisible: false,//新增界面是否显示
+	
+				addFormVisible: false, //新增界面是否显示
 				addLoading: false,
 				addFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
-					]
+					name: [{
+						required: true,
+						message: '请输入姓名',
+						trigger: 'blur'
+					}]
 				},
 				//新增界面数据
 				addForm: {
@@ -153,12 +155,13 @@
 					birth: '',
 					addr: ''
 				}
-
+	
 			}
 		},
 		methods: {
+			...mapActions('nav1', ['userListPageAction', 'removeUserAction', 'batchRemoveUserAction', 'editUserAction', 'addUserAction']), //使用对象展开暴露方法
 			//性别显示转换
-			formatSex: function (row, column) {
+			formatSex: function(row, column) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
 			},
 			handleCurrentChange(val) {
@@ -166,45 +169,42 @@
 				this.getUsers();
 			},
 			//获取用户列表
-			getUsers() {
+			async getUsers() {
 				let para = {
 					page: this.page,
 					name: this.filters.name
 				};
 				this.listLoading = true;
-				getUserListPage(para).then((res) => {
-					this.total = res.data.total;
-					this.users = res.data.users;
-					this.listLoading = false;
-				});
+				await this.userListPageAction(para);
+				this.listLoading = false;
 			},
 			//删除
-			handleDel: function (index, row) {
+			handleDel(index, row) {
 				this.$confirm('确认删除该记录吗?', '提示', {
 					type: 'warning'
 				}).then(() => {
 					this.listLoading = true;
-					let para = { id: row.id };
-					removeUser(para).then((res) => {
-						this.listLoading = false;
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUsers();
+					let para = {
+						id: row.id
+					};
+					this.removeUserAction(para);
+					this.listLoading = false;
+					this.$message({
+						message: '删除成功',
+						type: 'success'
 					});
+					this.getUsers();
 				}).catch(() => {
-
+	
 				});
 			},
 			//显示编辑界面
-			handleEdit: function (index, row) {
-				this.editFormVisible = true;
+			handleEdit(index, row) {
 				this.editForm = Object.assign({}, row);
+				this.editFormVisible = true;
 			},
 			//显示新增界面
-			handleAdd: function () {
-				this.addFormVisible = true;
+			handleAdd() {
 				this.addForm = {
 					name: '',
 					sex: -1,
@@ -212,82 +212,85 @@
 					birth: '',
 					addr: ''
 				};
+				this.addFormVisible = true;
 			},
 			//编辑
-			editSubmit: function () {
+			editSubmit() {
 				this.$refs.editForm.validate((valid) => {
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.editLoading = true;
 							let para = Object.assign({}, this.editForm);
 							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							editUser(para).then((res) => {
-								this.editLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['editForm'].resetFields();
-								this.editFormVisible = false;
-								this.getUsers();
+							this.editUserAction(para);
+							this.editLoading = false;
+							this.$message({
+								message: '提交成功',
+								type: 'success'
 							});
+							this.$refs['editForm'].resetFields();
+							this.editFormVisible = false;
+							this.getUsers();
+	
 						});
 					}
 				});
 			},
 			//新增
-			addSubmit: function () {
+			addSubmit: function() {
 				this.$refs.addForm.validate((valid) => {
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
 							this.addLoading = true;
 							let para = Object.assign({}, this.addForm);
 							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							addUser(para).then((res) => {
-								this.addLoading = false;
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
-								this.getUsers();
+							this.addUserAction(para);
+							this.addLoading = false;
+							this.$message({
+								message: '提交成功',
+								type: 'success'
 							});
+							this.$refs['addForm'].resetFields();
+							this.addFormVisible = false;
+							this.getUsers();
 						});
 					}
 				});
 			},
-			selsChange: function (sels) {
+			selsChange: function(sels) {
 				this.sels = sels;
 			},
 			//批量删除
-			batchRemove: function () {
+			batchRemove: function() {
 				var ids = this.sels.map(item => item.id).toString();
 				this.$confirm('确认删除选中记录吗？', '提示', {
 					type: 'warning'
 				}).then(() => {
 					this.listLoading = true;
-					let para = { ids: ids };
-					batchRemoveUser(para).then((res) => {
-						this.listLoading = false;
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUsers();
+					let para = {
+						ids: ids
+					};
+					this.batchRemoveUserAction(para);
+					this.listLoading = false;
+					this.$message({
+						message: '删除成功',
+						type: 'success'
 					});
+					this.getUsers();
 				}).catch(() => {
-
+	
 				});
 			}
 		},
 		mounted() {
 			this.getUsers();
+		},
+		computed: {
+			...mapState("nav1", ['userList']) //使用对象展开 混入 computed 对象中
 		}
 	}
-
 </script>
 
 <style scoped>
-
+	
 </style>
