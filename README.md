@@ -1,4 +1,4 @@
-# 一套标准的vue-cli3管理后台
+# 一套标准的vue-cli3管理后台demo
 
 ## 项目名 vue-admin 
 
