@@ -7,7 +7,7 @@ export default {
    * mock bootstrap
    */
   bootstrap() {
-    let mock = new MockAdapter(Axios);
+    let mock = new MockAdapter($http);
 
     // mock success request
     mock.onGet('/success').reply(200, {
@@ -22,7 +22,7 @@ export default {
     //登录
     mock.onPost('/login').reply(config => {
       let {username, password} = JSON.parse(config.data);
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         let user = null;
         setTimeout(() => {
           let hasUser = LoginUsers.some(u => {
@@ -49,7 +49,7 @@ export default {
         if (name && user.name.indexOf(name) == -1) return false;
         return true;
       });
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           resolve([200, {
             code: 200, 
@@ -69,7 +69,7 @@ export default {
       });
       let total = mockUsers.length;
       mockUsers = mockUsers.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           resolve([200, {
             code: 200, 
@@ -85,7 +85,7 @@ export default {
     mock.onGet('/user/remove').reply(config => {
       let { id } = config.params;
       _Users = _Users.filter(u => u.id !== id);
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           resolve([200, {
             code: 200,
@@ -100,7 +100,7 @@ export default {
       let { ids } = config.params;
       ids = ids.split(',');
       _Users = _Users.filter(u => !ids.includes(u.id));
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           resolve([200, {
             code: 200,
@@ -123,7 +123,7 @@ export default {
           return true;
         }
       });
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           resolve([200, {
             code: 200,
@@ -143,7 +143,7 @@ export default {
         birth: birth,
         sex: sex
       });
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           resolve([200, {
             code: 200,

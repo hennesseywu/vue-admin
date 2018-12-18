@@ -4,13 +4,14 @@ import './common/element.js'//element引入
 import store from './store'
 import router from './router'
 import axios from './common/axio';
-window.Axios=axios;
 import Mock from './mock'
-import ENV from './config/init'
+import 'font-awesome/css/font-awesome.min.css'
+window.$http = axios
+console.log("process.env",process.env)
+if( process.env.NODE_ENV=="development"){
+  Mock.bootstrap();
+}
 
-Mock.bootstrap();
-
-window.ENV=ENV;
 
 new Vue({
   store,

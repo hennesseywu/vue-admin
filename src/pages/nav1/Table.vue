@@ -161,7 +161,7 @@
 		methods: {
 			...mapActions('nav1', ['userListPageAction', 'removeUserAction', 'batchRemoveUserAction', 'editUserAction', 'addUserAction']), //使用对象展开暴露方法
 			//性别显示转换
-			formatSex: function(row, column) {
+			formatSex(row) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
 			},
 			handleCurrentChange(val) {
@@ -237,7 +237,7 @@
 				});
 			},
 			//新增
-			addSubmit: function() {
+			addSubmit() {
 				this.$refs.addForm.validate((valid) => {
 					if (valid) {
 						this.$confirm('确认提交吗？', '提示', {}).then(() => {
@@ -257,11 +257,11 @@
 					}
 				});
 			},
-			selsChange: function(sels) {
+			selsChange(sels) {
 				this.sels = sels;
 			},
 			//批量删除
-			batchRemove: function() {
+			batchRemove() {
 				var ids = this.sels.map(item => item.id).toString();
 				this.$confirm('确认删除选中记录吗？', '提示', {
 					type: 'warning'

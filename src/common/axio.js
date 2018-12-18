@@ -1,15 +1,13 @@
 import axios from 'axios'
-import baseUrl from '../config';
-const axio = axios.create({ 
-    baseURL: process.env.BASE_API, // node环境的不同，对应不同的baseURL
-     timeout: 15000, // 请求的超时时间
-      withCredentials: true // 允许携带cookie
-  })
-  // http request 拦截器 
+const axio = axios.create({
+  baseURL: process.env.BASE_URL, // node环境的不同，对应不同的baseURL
+  timeout: 15000, // 请求的超时时间
+  withCredentials: true // 允许携带cookie
+})
+// http request 拦截器 
 axio.interceptors.request.use(
   config => {
-    let reqUrl = baseUrl.server + config.url
-    config.url = reqUrl;
+    console.log("config",config)
     return config;
   },
   err => {
@@ -29,12 +27,11 @@ axio.interceptors.response.use(
 
         case 401:
           err.message = '未授权，请登录'
-          router.push({ name: 'worldcupIndex' })
+         
           break
 
         case 403:
           err.message = '拒绝访问'
-          router.push({ name: 'worldcupIndex' })
           break
 
         case 404:

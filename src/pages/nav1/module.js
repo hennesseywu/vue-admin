@@ -18,8 +18,7 @@ const state = {
 const actions = {
   //用户分页数据
   async userListPageAction({
-    commit,
-    state
+    commit
   }, params) {
     let {
       data
@@ -35,8 +34,7 @@ const actions = {
   },
     //用户分页数据
     async userListAction({
-      commit,
-      state
+      commit
     }, params) {
       let {
         data
@@ -53,8 +51,7 @@ const actions = {
   
   //删除用户
   async removeUserAction({
-    commit,
-    state
+    commit
   }, params) {
     let {
       data
@@ -70,8 +67,7 @@ const actions = {
   },
   //编辑用户
   async editUserAction({
-    commit,
-    state
+    commit
   }, params) {
     let {
       data
@@ -87,8 +83,7 @@ const actions = {
   },
   //批量删除用户
   async batchRemoveUserAction({
-    commit,
-    state
+    commit
   }, params) {
     let {
       data
@@ -104,8 +99,7 @@ const actions = {
   },
   //批量删除用户
   async addUserAction({
-    commit,
-    state
+    commit
   }, params) {
     let {
       data

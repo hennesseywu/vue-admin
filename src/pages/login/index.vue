@@ -16,8 +16,7 @@
 
 <script>
   import {
-    mapActions,
-    mapState
+    mapActions
   } from "vuex";
   export default {
     data() {

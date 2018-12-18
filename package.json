@@ -10,24 +10,24 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.5",
-   
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.15.0",
-    "mockjs": "^1.0.1-beta3",
-    "node-sass": "^4.11.0",
-    "sass": "^1.15.2",
-    "sass-loader": "^7.1.0",
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
+    "axios-mock-adapter": "^1.15.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-component": "^1.1.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "font-awesome": "^4.7.0",
+    "mockjs": "^1.0.1-beta3",
+    "node-sass": "^4.11.0",
+    "sass": "^1.15.2",
+    "sass-loader": "^7.1.0",
     "vue-cli-plugin-element": "^1.0.0",
     "vue-template-compiler": "^2.5.17"
   }

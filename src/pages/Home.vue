@@ -16,14 +16,23 @@
 		<el-col :span="24" class="main">
 			<aside class="menu-expanded">
 				<!--导航菜单-->
-				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" unique-opened router >
-					<template v-for="(item,index) in $router.options.routes"  v-if="!item.hidden">
-								<el-submenu :index="index+''" :key="index" v-if="!item.leaf" >
-									<template slot="title">{{item.name}}
+				<el-menu :default-active="$route.path" :default-openeds="['2','3']"   class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" unique-opened router >
+					<template    v-for="(item,index)  in $router.options.routes"  >
+						<div v-if="!item.hidden">
+								<el-submenu :index="index+''"   v-if="!item.leaf" >
+									<template slot="title">
+										<i :class="item.iconCls"></i>
+										{{item.name}}
 									</template>
-							<el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">{{child.name}}</el-menu-item>
+									<div  v-for="child in item.children"  :key="child.path" >
+										<el-menu-item v-if="!child.hidden" :index="child.path">{{child.name}}</el-menu-item>
+									</div>
 						</el-submenu>
-						<el-menu-item v-if="item.leaf&&item.children.length>0" :key="index"  :index="item.children[0].path">{{item.children[0].name}}</el-menu-item>
+						</div>
+						<el-menu-item v-if="item.leaf&&item.children.length>0" :key="index"  :index="item.children[0].path">
+							<i :class="item.iconCls"></i>
+							{{item.children[0].name}}
+							</el-menu-item>
 					</template>
 				</el-menu>
 			</aside>
@@ -77,9 +86,9 @@
 			handleClose() {
 				console.log('handleclose');
 			},
-			handleselect: function(a, b) {},
+			handleselect() {},
 			//退出登录
-			logout: function() {
+			logout() {
 				var _this = this;
 				this.$confirm('确认退出吗?', '提示', {
 					//type: 'warning'

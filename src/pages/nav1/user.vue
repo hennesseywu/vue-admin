@@ -50,7 +50,7 @@
 		methods: {
 			...mapActions('nav1', ['userListAction']), //使用对象展开暴露方法
 			//性别显示转换
-			formatSex(row, column) {
+			formatSex(row) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
 			},
 			//获取用户列表

@@ -16,8 +16,7 @@ const actions = {
    * login动作接口
    */
    async loginAction({
-    commit,
-    state
+    commit
   }, params) {
     let {data} =await requestLogin(params);
     if (data.code !== 200) {

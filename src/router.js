@@ -29,6 +29,7 @@ let routes = [{
         path: '/',
         component: Home,
         name: '导航一',
+        iconCls: 'fa fa-id-card-o',//图标icon
         children: [{
                 path: '/main',
                 component: Main,
@@ -56,6 +57,7 @@ let routes = [{
         path: '/',
         component: Home,
         name: '导航二',
+        iconCls: 'fa fa-bar-chart',
         children: [{
                 path: '/page4',
                 component: Page4,
@@ -73,6 +75,7 @@ let routes = [{
         component: Home,
         name: '',
         leaf: true, //只有一个节点
+        iconCls: 'fa fa-address-card', 
         children: [{
             path: '/page6',
             component: Page6,
