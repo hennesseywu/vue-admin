@@ -21,16 +21,17 @@
 						<div v-if="!item.hidden">
 								<el-submenu :index="index+''"   v-if="!item.leaf" >
 									<template slot="title">
-										<i :class="item.iconCls"></i>
 										{{item.name}}
 									</template>
 									<div  v-for="child in item.children"  :key="child.path" >
-										<el-menu-item v-if="!child.hidden" :index="child.path">{{child.name}}</el-menu-item>
+										<el-menu-item v-if="!child.hidden" :index="child.path">
+												<i :class="child.iconCls"></i>
+											{{child.name}}
+											</el-menu-item>
 									</div>
 						</el-submenu>
 						</div>
 						<el-menu-item v-if="item.leaf&&item.children.length>0" :key="index"  :index="item.children[0].path">
-							<i :class="item.iconCls"></i>
 							{{item.children[0].name}}
 							</el-menu-item>
 					</template>

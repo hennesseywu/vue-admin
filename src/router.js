@@ -29,27 +29,32 @@ let routes = [{
         path: '/',
         component: Home,
         name: '导航一',
-        iconCls: 'fa fa-id-card-o',//图标icon
         children: [{
                 path: '/main',
                 component: Main,
                 name: '主页',
-                hidden: true
+                hidden: true,
+                iconCls: 'fa fa-id-card-o', //图标icon
             },
             {
                 path: '/table',
                 component: Table,
-                name: 'Table'
+                name: 'Table',
+                iconCls: 'fa fa-book', //图标icon
+
             },
             {
                 path: '/form',
                 component: Form,
-                name: 'Form'
+                name: 'Form',
+                iconCls: 'fa fa-folder' //图标icon
             },
             {
                 path: '/user',
                 component: user,
-                name: '列表'
+                name: '列表',
+                iconCls: 'fa fa-id-card-o' //图标icon
+
             },
         ]
     },
@@ -61,12 +66,14 @@ let routes = [{
         children: [{
                 path: '/page4',
                 component: Page4,
-                name: '页面4'
+                name: '页面4',
+                iconCls: 'fa fa-compass' //图标icon
             },
             {
                 path: '/page5',
                 component: Page5,
-                name: '页面5'
+                name: '页面5',
+                iconCls: 'fa fa-comment' //图标icon
             }
         ]
     },
@@ -75,7 +82,7 @@ let routes = [{
         component: Home,
         name: '',
         leaf: true, //只有一个节点
-        iconCls: 'fa fa-address-card', 
+        iconCls: 'fa fa-address-card',
         children: [{
             path: '/page6',
             component: Page6,
