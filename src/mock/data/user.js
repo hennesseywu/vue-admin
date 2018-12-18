@@ -4,7 +4,7 @@ const LoginUsers = [
     id: 1,
     username: 'admin',
     password: '123456',
-    avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544699149131&di=046c6de8ded56a897f2750fc99c818fc&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F31%2F87%2F96573b585a7c9c4.jpg',
+    avatar: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545105819211&di=f661aea3a33798d97b51bf9c0e62612b&imgtype=0&src=http%3A%2F%2Fpic35.photophoto.cn%2F20150509%2F0010023701662314_b.jpg',
     name: '张某某'
   }
 ];

@@ -1,15 +1,13 @@
 <template>
 	<el-row class="container">
 		<el-col :span="24" class="header">
-			<el-col :span="10" class="logo logo-width">
+			<el-col :span="10" class="logo">
 				{{sysName}}
 			</el-col>
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="hover">
 					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
 					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>我的消息</el-dropdown-item>
-						<el-dropdown-item>设置</el-dropdown-item>
 						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
@@ -19,13 +17,13 @@
 			<aside class="menu-expanded">
 				<!--导航菜单-->
 				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" @select="handleselect" unique-opened router >
-					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
-								<el-submenu :index="index+''" v-if="!item.leaf" >
+					<template v-for="(item,index) in $router.options.routes"  v-if="!item.hidden">
+								<el-submenu :index="index+''" :key="index" v-if="!item.leaf" >
 									<template slot="title">{{item.name}}
-				</template>
+									</template>
 							<el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">{{child.name}}</el-menu-item>
 						</el-submenu>
-						<el-menu-item v-if="item.leaf&&item.children.length>0"  :index="item.children[0].path">{{item.children[0].name}}</el-menu-item>
+						<el-menu-item v-if="item.leaf&&item.children.length>0" :key="index"  :index="item.children[0].path">{{item.children[0].name}}</el-menu-item>
 					</template>
 				</el-menu>
 			</aside>
@@ -135,14 +133,14 @@
 				}
 			}
 			.logo {
-				//width:230px;
+				width:230px;
 				height: 60px;
 				font-size: 22px;
 				padding-left: 20px;
 				padding-right: 20px;
-				// border-color: rgba(238,241,146,0.3);
-				// border-right-width: 1px;
-				// border-right-style: solid;
+				border-color: #fff;
+				border-right-width: 1px;
+				border-right-style: solid;
 				img {
 					width: 40px;
 					float: left;
@@ -151,9 +149,6 @@
 				.txt {
 					color: #fff;
 				}
-			}
-			.logo-width {
-				width: 230px;
 			}
 			.tools {
 				padding: 0px 23px;
